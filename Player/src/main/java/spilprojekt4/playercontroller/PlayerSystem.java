@@ -24,7 +24,6 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void process(GameData gameData, World world) {
-
         for (Entity entity : world.getEntities(EntityType.PLAYER)) {
 
             if (gameData.getKeys().isDown(GameKeys.A)) {
@@ -49,7 +48,6 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
             }
 
             if (gameData.getKeys().isDown(GameKeys.W)) {
-                                System.out.println("ppppp");
                 gameData.addEvent(new Event(EventType.PICKUP_WEAPON, entity.getID()));
             }
 
