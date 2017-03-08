@@ -18,7 +18,7 @@ public class GameData {
     private int cameraY;
     private int mouseX;
     private int mouseY;
-    private final float gravityConstant = -10f;
+    private final float gravityConstant = -1000f;
     private List<Event> events = new CopyOnWriteArrayList<>();
 
     public List<Event> getAllEvents() {

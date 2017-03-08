@@ -19,7 +19,7 @@ public class Processor implements IServiceProcessor {
 
         for (Entity n : world.getAllEntities()) {
             if (n.getHasGravity() == true) {
-                n.setVerticalVelocity(n.getVerticalVelocity() + gameData.getGravityConstant());
+                n.setVerticalVelocity(n.getVerticalVelocity() + gameData.getDelta() * gameData.getGravityConstant());
             }
 
         }
