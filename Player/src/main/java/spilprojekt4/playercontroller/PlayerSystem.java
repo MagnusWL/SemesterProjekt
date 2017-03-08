@@ -36,6 +36,9 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
             }
 
             if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+                if (entity.isGrounded()) {
+                    entity.setVerticalVelocity(entity.getJumpSpeed());
+                }
                 for (ICollisionService e : Lookup.getDefault().lookupAll(ICollisionService.class)) {
                     if (e.isColliding(world, gameData, entity, 0, -2)) {
                         entity.setVerticalVelocity(entity.getJumpSpeed());

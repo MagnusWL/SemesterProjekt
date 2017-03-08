@@ -10,6 +10,7 @@ public class Entity {
     private float[] shapeX;
     private float[] shapeY;
     private String sprite;
+    private boolean grounded;
     private float movementSpeed;
     private float jumpSpeed;
     private float velocity;
@@ -19,6 +20,16 @@ public class Entity {
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
+
+    public boolean isGrounded() {
+        return grounded;
+    }
+
+    public void setGrounded(boolean grounded) {
+        this.grounded = grounded;
+    }
+    
+    
     
     public String getSprite() {
         return sprite;

@@ -3,15 +3,20 @@ package spilprojekt4.collision;
 import java.awt.Polygon;
 import java.awt.geom.Area;
 import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.ICollisionService;
+import spilprojekt4.common.services.IServiceProcessor;
 
-@ServiceProvider(service = ICollisionService.class)
+@ServiceProviders(value = {
+    @ServiceProvider(service = ICollisionService.class),
+    @ServiceProvider(service = IServiceProcessor.class)
+})
 
-public class Processor implements ICollisionService {
+public class Processor implements ICollisionService, IServiceProcessor {
 
     @Override
     public boolean isColliding(World world, GameData gameData, Entity entity, float moveX, float moveY) {
@@ -53,5 +58,16 @@ public class Processor implements ICollisionService {
         a.intersect(new Area(poly2));
 
         return !a.isEmpty();
+    }
+
+    @Override
+    public void process(GameData gameData, World world) {
+        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY)) {
+            if (isColliding(world, gameData, entity, 0, -2)) {
+                entity.setGrounded(true);
+            } else {
+                entity.setGrounded(false);
+            }
+        }
     }
 }
