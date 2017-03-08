@@ -47,10 +47,6 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
                 entity.setVelocity(0);
             }
 
-            if (gameData.getKeys().isDown(GameKeys.W)) {
-                gameData.addEvent(new Event(EventType.PICKUP_WEAPON, entity.getID()));
-            }
-
             for (Event e : gameData.getAllEvents()) {
                 if (e.getType() == EventType.ENTITY_HIT && world.getEntity(e.getEntityID()).equals(entity.getID())) {
                     entity.setLife(entity.getLife() - 1);
@@ -83,6 +79,7 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
         playerCharacter.setSprite("midgårdsormen");
         playerCharacter.setShapeX(new float[]{5, 25, 25, 5});
         playerCharacter.setShapeY(new float[]{25, 25, 2, 2});
+        gameData.addEvent(new Event(EventType.PICKUP_WEAPON, playerCharacter.getID()));
 
         return playerCharacter;
     }
