@@ -59,6 +59,7 @@
     <modules>
         <module>branding</module>
         <module>application</module>
+        <module>Fuck</module>
     </modules>
 
     <properties>
