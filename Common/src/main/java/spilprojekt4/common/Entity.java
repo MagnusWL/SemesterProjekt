@@ -1,5 +1,6 @@
 package spilprojekt4.common;
 
+import java.awt.Polygon;
 import java.util.UUID;
 
 public class Entity {
@@ -18,7 +19,7 @@ public class Entity {
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
-
+    
     public String getSprite() {
         return sprite;
     }

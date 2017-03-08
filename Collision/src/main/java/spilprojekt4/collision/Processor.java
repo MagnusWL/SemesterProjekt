@@ -8,8 +8,6 @@ import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.ICollisionService;
-import spilprojekt4.common.services.IServiceInitializer;
-import spilprojekt4.common.services.IServiceProcessor;
 
 @ServiceProvider(service = ICollisionService.class)
 
