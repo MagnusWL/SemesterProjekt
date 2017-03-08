@@ -72,6 +72,7 @@ public class Game implements ApplicationListener {
                 new InputController(gameData)
         );
         batch = new SpriteBatch();
+        
         Texture tex = new Texture(Gdx.files.internal("midgårdsormen.png"));
         spriteMap.put("midgårdsormen", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("penisenemy.png"));
