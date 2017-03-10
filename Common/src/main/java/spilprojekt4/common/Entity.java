@@ -4,6 +4,7 @@ import java.awt.Polygon;
 import java.util.UUID;
 
 public class Entity {
+
     private EntityType entityType;
     private float x;
     private float y;
@@ -15,6 +16,8 @@ public class Entity {
     private float jumpSpeed;
     private float velocity;
     private float verticalVelocity;
+    private float attackCooldown;
+    private float timeSinceAttack;
     private int life;
     private int maxLife;
     private boolean hasGravity;
@@ -28,9 +31,23 @@ public class Entity {
     public void setGrounded(boolean grounded) {
         this.grounded = grounded;
     }
+
+    public float getTimeSinceAttack() {
+        return timeSinceAttack;
+    }
+
+    public void setTimeSinceAttack(float timeSinceAttack) {
+        this.timeSinceAttack = timeSinceAttack;
+    }
     
-    
-    
+    public float getAttackCooldown() {
+        return attackCooldown;
+    }
+
+    public void setAttackCooldown(float attackCooldown) {
+        this.attackCooldown = attackCooldown;
+    }
+
     public String getSprite() {
         return sprite;
     }
@@ -95,26 +112,22 @@ public class Entity {
         this.velocity = velocity;
     }
 
-    public EntityType getEntityType()
-    {
+    public EntityType getEntityType() {
         return entityType;
     }
 
-    public void setEntityType(EntityType entityType)
-    {
+    public void setEntityType(EntityType entityType) {
         this.entityType = entityType;
     }
-    
-    public int[][] getMap()
-    {
+
+    public int[][] getMap() {
         return map;
     }
 
-    public void setMap(int[][] map)
-    {
+    public void setMap(int[][] map) {
         this.map = map;
     }
-    
+
     public float getVerticalVelocity() {
         return verticalVelocity;
     }
@@ -136,7 +149,7 @@ public class Entity {
     }
 
     public void setX(float x) {
-      this.x = x;
+        this.x = x;
     }
 
     public float getY() {

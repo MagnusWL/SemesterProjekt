@@ -21,35 +21,39 @@ import spilprojekt4.common.services.ICollisionService;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
 
-@ServiceProviders(value={
-        @ServiceProvider(service=IServiceProcessor.class),
-        @ServiceProvider(service=IServiceInitializer.class)})
+@ServiceProviders(value = {
+    @ServiceProvider(service = IServiceProcessor.class),
+    @ServiceProvider(service = IServiceInitializer.class)})
 
 public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void process(GameData gameData, World world) {
-        for(Event e: gameData.getAllEvents())
-            if(e.getType() == EventType.PICKUP_WEAPON)
-            {
+        for (Event e : gameData.getAllEvents()) {
+            if (e.getType() == EventType.PICKUP_WEAPON) {
                 createGun(gameData, world, world.getEntity(e.getEntityID()));
                 gameData.removeEvent(e);
             }
-        
+        }
+
         for (Entry e : world.getWeapons().entrySet()) {
-            
+
             Entity carrier = world.getEntity((String) e.getKey());
             Entity gun = (Entity) e.getValue();
             gun.setX(carrier.getX());
             gun.setY(carrier.getY());
             gun.setVelocity(carrier.getVelocity());
 
-            if (carrier.getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S)) {
+            if (carrier.getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S) && gun.getTimeSinceAttack() > gun.getAttackCooldown()) {
                 gameData.addEvent(new Event(EventType.PLAYER_SHOOT, gun.getID()));
+                gun.setTimeSinceAttack(0);
             }
-
-            if (carrier.getEntityType() == EntityType.ENEMY) {
+            else if (carrier.getEntityType() == EntityType.ENEMY) {
                 gameData.addEvent(new Event(EventType.ENEMY_SHOOT, gun.getID()));
+                gun.setTimeSinceAttack(0);
+            }
+            else {
+                gun.setTimeSinceAttack(gun.getTimeSinceAttack() + 1 * gameData.getDelta());
             }
         }
     }
@@ -58,6 +62,8 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
         Entity weapon = new Entity();
         weapon.setEntityType(EntityType.WEAPON);
         weapon.setSprite("gun");
+        weapon.setAttackCooldown(200);
+        weapon.setTimeSinceAttack(0);
         world.getWeapons().put(e.getID(), weapon);
         world.addEntity(weapon);
     }
