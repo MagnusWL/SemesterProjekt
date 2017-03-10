@@ -67,13 +67,13 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
 
         playerCharacter.setEntityType(EntityType.PLAYER);
         playerCharacter.setX((int) (gameData.getDisplayWidth() * 0.5));
-        playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
+        playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.15));
         playerCharacter.setHasGravity(true);
         playerCharacter.setMaxLife(100);
         playerCharacter.setLife(playerCharacter.getMaxLife());
         playerCharacter.setJumpSpeed(400);
         playerCharacter.setMovementSpeed(150);
-        playerCharacter.setSprite("midgårdsormen");
+        playerCharacter.setSprite("Player");
         playerCharacter.setShapeX(new float[]{5, 25, 25, 5});
         playerCharacter.setShapeY(new float[]{25, 25, 2, 2});
         gameData.addEvent(new Event(EventType.PICKUP_WEAPON, playerCharacter.getID()));

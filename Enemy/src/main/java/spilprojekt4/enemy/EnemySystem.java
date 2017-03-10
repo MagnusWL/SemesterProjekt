@@ -41,7 +41,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
                 movementDecision(entity, EntityType.PLAYER, world);
             }
 
-            if (rand.nextFloat() > 0.9f) {
+            if (rand.nextFloat() > 0.99f) {
                 if (entity.isGrounded()) {
                     entity.setVerticalVelocity(entity.getJumpSpeed());
                 }
@@ -65,7 +65,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
     @Override
     public void start(GameData gameData, World world
     ) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             Entity enemy = createEnemy(gameData, world);
             world.addEntity(enemy);
         }
@@ -75,14 +75,14 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         Entity enemyCharacter = new Entity();
 
         enemyCharacter.setEntityType(EntityType.ENEMY);
-        enemyCharacter.setX((int) (gameData.getDisplayWidth() * Math.random()));
-        enemyCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
+        enemyCharacter.setX((int) (gameData.getDisplayWidth()/2.0 + gameData.getDisplayWidth()/2.0 * Math.random()));
+        enemyCharacter.setY((int) (gameData.getDisplayHeight() * 0.15));
         enemyCharacter.setHasGravity(true);
         enemyCharacter.setMaxLife(10);
         enemyCharacter.setLife(enemyCharacter.getMaxLife());
         enemyCharacter.setJumpSpeed(300);
         enemyCharacter.setMovementSpeed(85);
-        enemyCharacter.setSprite("penisenemy");
+        enemyCharacter.setSprite("Enemy");
         enemyCharacter.setShapeX(new float[]{5, 25, 25, 5});
         enemyCharacter.setShapeY(new float[]{25, 25, 2, 2});
         gameData.addEvent(new Event(EventType.PICKUP_WEAPON, enemyCharacter.getID()));
