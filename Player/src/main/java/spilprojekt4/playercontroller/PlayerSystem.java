@@ -73,7 +73,7 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
         playerCharacter.setLife(playerCharacter.getMaxLife());
         playerCharacter.setJumpSpeed(400);
         playerCharacter.setMovementSpeed(150);
-        playerCharacter.setSprite("midgårdsormen");
+        playerCharacter.setSprite("Player");
         playerCharacter.setShapeX(new float[]{5, 25, 25, 5});
         playerCharacter.setShapeY(new float[]{25, 25, 2, 2});
         gameData.addEvent(new Event(EventType.PICKUP_WEAPON, playerCharacter.getID()));

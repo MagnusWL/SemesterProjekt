@@ -70,10 +70,10 @@ public class Game implements ApplicationListener {
         );
         batch = new SpriteBatch();
 
-        Texture tex = new Texture(Gdx.files.internal("midgårdsormen.png"));
-        spriteMap.put("midgårdsormen", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("penisenemy.png"));
-        spriteMap.put("penisenemy", new Sprite(tex));
+        Texture tex = new Texture(Gdx.files.internal("Player.png"));
+        spriteMap.put("Player", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("Enemy.png"));
+        spriteMap.put("Enemy", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("base.png"));
         spriteMap.put("base", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("gun.png"));

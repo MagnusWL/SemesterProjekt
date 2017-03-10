@@ -82,7 +82,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         enemyCharacter.setLife(enemyCharacter.getMaxLife());
         enemyCharacter.setJumpSpeed(300);
         enemyCharacter.setMovementSpeed(85);
-        enemyCharacter.setSprite("penisenemy");
+        enemyCharacter.setSprite("Enemy");
         enemyCharacter.setShapeX(new float[]{5, 25, 25, 5});
         enemyCharacter.setShapeY(new float[]{25, 25, 2, 2});
         gameData.addEvent(new Event(EventType.PICKUP_WEAPON, enemyCharacter.getID()));
