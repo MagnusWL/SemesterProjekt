@@ -31,8 +31,8 @@ public class World {
     
     public void removeWeapon(String id)
     {
+        entityMap.remove(weapons.get(id).getID());
         weapons.remove(id);
-        entityMap.remove(id);
     }
     
     public Entity getEntity(String id)

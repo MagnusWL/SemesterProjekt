@@ -49,7 +49,7 @@ public class Processor implements IServiceProcessor {
                     }
 
                     if (entity.getEntityType() == EntityType.PROJECTILE) {
-                        for (Entity entityHit : world.getEntities(EntityType.PLAYER, EntityType.ENEMY)) {
+                        for (Entity entityHit : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.BASE)) {
                             if (e.isEntitiesColliding(world, gameData, entity, entityHit)) {
                                 gameData.addEvent(new Event(EventType.ENTITY_HIT, entityHit.getID()));
                                 world.removeEntity(entity);
