@@ -69,7 +69,7 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
         playerCharacter.setX((int) (gameData.getDisplayWidth() * 0.5));
         playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
         playerCharacter.setHasGravity(true);
-        playerCharacter.setMaxLife(10);
+        playerCharacter.setMaxLife(100);
         playerCharacter.setLife(playerCharacter.getMaxLife());
         playerCharacter.setJumpSpeed(400);
         playerCharacter.setMovementSpeed(150);
