@@ -2,6 +2,7 @@ package spilprojekt4.enemy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import spilprojekt4.common.Entity;
@@ -13,22 +14,35 @@ import spilprojekt4.common.events.EventType;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
 
-@ServiceProviders(value={
-        @ServiceProvider(service=IServiceProcessor.class),
-        @ServiceProvider(service=IServiceInitializer.class)})
+@ServiceProviders(value = {
+    @ServiceProvider(service = IServiceProcessor.class),
+    @ServiceProvider(service = IServiceInitializer.class)})
 
 public class EnemySystem implements IServiceProcessor, IServiceInitializer {
 
     private List<Entity> enemies = new ArrayList<>();
+    private final Random rand = new Random();
 
     @Override
     public void process(GameData gameData, World world) {
         for (Entity entity : world.getEntities(EntityType.ENEMY)) {
             for (Entity player : world.getEntities(EntityType.PLAYER)) {
-                if (player.getX() > entity.getX()) {
-                    entity.setVelocity(entity.getMovementSpeed());
-                } else {
-                    entity.setVelocity(-entity.getMovementSpeed());
+                for (Entity base : world.getEntities(EntityType.BASE)) {
+                    if (Math.abs(entity.getX() - player.getX()) < Math.abs(entity.getX() - base.getX())) {
+                        if (player.getX() - 50 > entity.getX()) {
+                            entity.setVelocity(entity.getMovementSpeed());
+                        } else if (player.getX() + 50 < entity.getX()) {
+                            entity.setVelocity(-entity.getMovementSpeed());
+                        } else {
+                            entity.setVelocity(0);
+                        }
+                    }
+                }
+            }
+
+            if (rand.nextFloat() > 0.9f) {
+                if (entity.isGrounded()) {
+                    entity.setVerticalVelocity(entity.getJumpSpeed());
                 }
             }
 
