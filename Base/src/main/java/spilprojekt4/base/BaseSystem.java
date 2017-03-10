@@ -6,12 +6,14 @@ import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
+import spilprojekt4.common.events.Event;
+import spilprojekt4.common.events.EventType;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
 
-@ServiceProviders(value={
-        @ServiceProvider(service=IServiceProcessor.class),
-        @ServiceProvider(service=IServiceInitializer.class)})
+@ServiceProviders(value = {
+    @ServiceProvider(service = IServiceProcessor.class),
+    @ServiceProvider(service = IServiceInitializer.class)})
 
 public class BaseSystem implements IServiceProcessor, IServiceInitializer {
 
@@ -19,9 +21,19 @@ public class BaseSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void process(GameData gameData, World world) {
-
         for (Entity entity : world.getEntities(EntityType.BASE)) {
-            
+            for (Event e : gameData.getAllEvents()) {
+                if (e.getType() == EventType.ENTITY_HIT && e.getEntityID().equals(entity.getID())) {
+
+                    entity.setLife(entity.getLife() - 1);
+                    if (entity.getLife() <= 0) {
+                        world.removeWeapon(entity.getID());
+                        world.removeEntity(entity);
+                    }
+
+                    gameData.removeEvent(e);
+                }
+            }
         }
     }
 
