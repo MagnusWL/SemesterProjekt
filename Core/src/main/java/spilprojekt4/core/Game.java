@@ -7,6 +7,7 @@ package spilprojekt4.core;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -83,6 +84,16 @@ public class Game implements ApplicationListener {
         spriteMap.put("sky", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("grass.png"));
         spriteMap.put("grass", new Sprite(tex));
+
+        tex = new Texture(Gdx.files.internal("back1.png"));
+        spriteMap.put("back1", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("back2.png"));
+        spriteMap.put("back2", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("back3.png"));
+        spriteMap.put("back3", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("back4.png"));
+        spriteMap.put("back4", new Sprite(tex));
+
         sr = new ShapeRenderer();
     }
 
@@ -99,10 +110,11 @@ public class Game implements ApplicationListener {
         }
 
         update();
-        drawMap();
+        drawBackground();
+//        drawMap();
         drawSprites();
         drawHealthBars();
-
+        drawForeground();
         gameData.getKeys().update();
     }
 
@@ -160,6 +172,44 @@ public class Game implements ApplicationListener {
         sprite.setX(entity.getX() - gameData.getCameraX());
         sprite.setY(entity.getY() - gameData.getCameraY());
         sprite.draw(batch);
+    }
+
+    float back1m = 2f;
+    float back2m = 1f;
+    float back3m = 0.5f;
+    float back4m = 0.25f;
+
+    private void drawBackground() {
+        sr.begin(ShapeType.Filled);
+        sr.setColor(new Color(0, 138f / 255f, 1f, 1));
+        sr.rect(0, 0, gameData.getDisplayWidth(), gameData.getDisplayWidth());
+        sr.end();
+        batch.begin();
+        drawBackground(spriteMap.get("back4"), back4m);
+        drawBackground(spriteMap.get("back3"), back3m);
+        drawBackground(spriteMap.get("back2"), back2m);
+        batch.end();
+    }
+
+    private void drawForeground() {
+        batch.begin();
+        drawBackground(spriteMap.get("back1"), back1m);
+        batch.end();
+    }
+
+    private float playerX = 0;
+
+    private void drawBackground(Sprite sprite, float mov) {
+        for (Entity player : world.getEntities(EntityType.PLAYER)) {
+            playerX = player.getX();
+        }
+
+        int repeats = 2 + (int) (((gameData.getTileSize() * gameData.getMapWidth()) / sprite.getWidth()) * mov);
+        for (int i = -1; i < repeats; i++) {
+            sprite.setX(i * sprite.getWidth() - gameData.getCameraX() * mov);
+            sprite.draw(batch);
+        }
+
     }
 
     private void drawMap() {
