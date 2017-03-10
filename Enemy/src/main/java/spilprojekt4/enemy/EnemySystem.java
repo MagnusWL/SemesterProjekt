@@ -39,8 +39,8 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
 
                     entity.setLife(entity.getLife() - 1);
                     if (entity.getLife() <= 0) {
-                        world.removeEntity(entity);
                         world.removeWeapon(entity.getID());
+                        world.removeEntity(entity);
                     }
 
                     gameData.removeEvent(e);
