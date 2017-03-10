@@ -21,7 +21,7 @@ public class BaseSystem implements IServiceProcessor, IServiceInitializer {
     public void process(GameData gameData, World world) {
 
         for (Entity entity : world.getEntities(EntityType.BASE)) {
-
+            
         }
     }
 
