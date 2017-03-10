@@ -32,8 +32,8 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
     private Entity createBullet(Entity entity, GameData gameData, World world, float angle) {
         Entity bullet = new Entity();
         bullet.setEntityType(EntityType.PROJECTILE);
-        bullet.setVelocity((float) (500 * Math.cos(angle)));
-        bullet.setVerticalVelocity((float) (500 * Math.sin(angle)));
+        bullet.setVelocity((float) (200 * Math.cos(angle)));
+        bullet.setVerticalVelocity((float) (200 * Math.sin(angle)));
         bullet.setSprite("bullet");
         bullet.setX(entity.getX() + 15 + ((float) Math.cos(angle) * 15));
         bullet.setY(entity.getY() + 15 + ((float) Math.sin(angle) * 15));
