@@ -26,25 +26,19 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
     @Override
     public void process(GameData gameData, World world) {
         for (Entity entity : world.getEntities(EntityType.ENEMY)) {
+            float distancePlayer = Float.MAX_VALUE;
+            float distanceBase = Float.MAX_VALUE;
             for (Entity player : world.getEntities(EntityType.PLAYER)) {
-                for (Entity base : world.getEntities(EntityType.BASE)) {
-                    if (Math.abs(entity.getX() - player.getX()) < Math.abs(entity.getX() - base.getX())) {
-                        if (player.getX() - 50 > entity.getX()) {
-                            entity.setVelocity(entity.getMovementSpeed());
-                        } else if (player.getX() + 50 < entity.getX()) {
-                            entity.setVelocity(-entity.getMovementSpeed());
-                        } else {
-                            entity.setVelocity(0);
-                        }
-                    } else {
-                        if (base.getX() - 25 > entity.getX()) {
-                            entity.setVelocity(entity.getMovementSpeed());
-                        }
-                        if (base.getX() + 25 < entity.getX()) {
-                            entity.setVelocity(entity.getMovementSpeed());
-                        }
-                    }
-                }
+                distancePlayer = Math.abs(player.getX() - entity.getX());
+            }
+            for (Entity base : world.getEntities(EntityType.BASE)) {
+                distanceBase = Math.abs(base.getX() - entity.getX());
+            }
+
+            if (distancePlayer > distanceBase) {
+                movementDecision(entity, EntityType.BASE, world);
+            } else {
+                movementDecision(entity, EntityType.PLAYER, world);
             }
 
             if (rand.nextFloat() > 0.9f) {
@@ -69,7 +63,8 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
     }
 
     @Override
-    public void start(GameData gameData, World world) {
+    public void start(GameData gameData, World world
+    ) {
         for (int i = 0; i < 10; i++) {
             Entity enemy = createEnemy(gameData, world);
             world.addEntity(enemy);
@@ -101,6 +96,18 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
     public void stop(GameData gameData, World world) {
         for (Entity e : enemies) {
             world.removeEntity(e);
+        }
+    }
+
+    private void movementDecision(Entity enemy, EntityType target, World world) {
+        for (Entity entity : world.getEntities(target)) {
+            if (entity.getX() - 50 > enemy.getX()) {
+                enemy.setVelocity(enemy.getMovementSpeed());
+            } else if (entity.getX() + 50 < enemy.getX()) {
+                enemy.setVelocity(-enemy.getMovementSpeed());
+            } else {
+                enemy.setVelocity(0);
+            }
         }
     }
 }

@@ -55,21 +55,24 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
             }
 
             if (e.getType() == EventType.ENEMY_SHOOT) {
+                Entity enemy = world.getEntity(e.getEntityID());
+                float distancePlayer = Float.MAX_VALUE;
+                float distanceBase = Float.MAX_VALUE;
                 for (Entity player : world.getEntities(EntityType.PLAYER)) {
-                    for (Entity base : world.getEntities(EntityType.BASE)) {
-
-                        Entity enemy = world.getEntity(e.getEntityID());
-                        if (Math.abs(enemy.getX() - player.getX()) < Math.abs(enemy.getX() - base.getX())) {
-                            float angle = (float) Math.atan2((player.getY() + 15) - (enemy.getY() + 15), (player.getX() + 15) - (enemy.getX() + 15));
-                            world.addEntity(createBullet(enemy, gameData, world, angle));
-                            gameData.removeEvent(e);
-                        } else {
-                            float angle = (float) Math.atan2(base.getY() + 50 - (enemy.getY() + 15), (base.getX() + 50) - (enemy.getX() + 15));
-                            world.addEntity(createBullet(enemy, gameData, world, angle));
-                            gameData.removeEvent(e);
-                        }
-                    }
+                    distancePlayer = Math.abs(player.getX() - enemy.getX());
                 }
+                for (Entity base : world.getEntities(EntityType.BASE)) {
+                    distanceBase = Math.abs(base.getX() - enemy.getX());
+                }
+
+                if (distancePlayer > distanceBase) {
+                    shootDecision(enemy, EntityType.BASE, world, gameData);
+                    gameData.removeEvent(e);
+                } else {
+                    shootDecision(enemy, EntityType.PLAYER, world, gameData);
+                    gameData.removeEvent(e);
+                }
+
             }
         }
     }
@@ -83,6 +86,19 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
     public void stop(GameData gameData, World world) {
         for (Entity e : bullets) {
             world.removeEntity(e);
+        }
+    }
+
+    private void shootDecision(Entity enemy, EntityType entity, World world, GameData gameData) {
+        for (Entity target : world.getEntities(entity)) {
+            if (entity == EntityType.PLAYER) {
+                float angle = (float) Math.atan2((target.getY() + 15) - (enemy.getY() + 15), (target.getX() + 15) - (enemy.getX() + 15));
+                world.addEntity(createBullet(enemy, gameData, world, angle));
+            } else {
+                float angle = (float) Math.atan2(target.getY() + 50 - (enemy.getY() + 15), (target.getX() + 50) - (enemy.getX() + 15));
+                world.addEntity(createBullet(enemy, gameData, world, angle));
+            }
+
         }
     }
 }
