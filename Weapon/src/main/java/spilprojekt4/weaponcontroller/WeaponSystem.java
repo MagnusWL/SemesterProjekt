@@ -33,22 +33,23 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
             }
         }
 
-        for (Entry e : world.getWeapons().entrySet()) {
+        for (String key : world.getWeapons().keySet()) {
 
-            Entity carrier = world.getEntity((String) e.getKey());
-            Entity gun = (Entity) e.getValue();
+            Entity carrier = world.getEntity(key);
+            Entity gun = world.getWeapons().get(key);
             gun.setX(carrier.getX());
             gun.setY(carrier.getY());
             gun.setVelocity(carrier.getVelocity());
-
+            gun.setTimeSinceAttack(gun.getTimeSinceAttack() + 10 * gameData.getDelta());
+            
             if (carrier.getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S) && gun.getTimeSinceAttack() > gun.getAttackCooldown()) {
                 gameData.addEvent(new Event(EventType.PLAYER_SHOOT, gun.getID()));
                 gun.setTimeSinceAttack(0);
-            } else if (carrier.getEntityType() == EntityType.ENEMY) {
+            }
+            
+            if (carrier.getEntityType() == EntityType.ENEMY && gun.getTimeSinceAttack() > gun.getAttackCooldown()) {
                 gameData.addEvent(new Event(EventType.ENEMY_SHOOT, gun.getID()));
                 gun.setTimeSinceAttack(0);
-            } else {
-                gun.setTimeSinceAttack(gun.getTimeSinceAttack() + 1 * gameData.getDelta());
             }
         }
     }
@@ -57,7 +58,7 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
         Entity weapon = new Entity();
         weapon.setEntityType(EntityType.WEAPON);
         weapon.setSprite("gun");
-        weapon.setAttackCooldown(200);
+        weapon.setAttackCooldown(5);
         weapon.setTimeSinceAttack(0);
         world.getWeapons().put(e.getID(), weapon);
         world.addEntity(weapon);
