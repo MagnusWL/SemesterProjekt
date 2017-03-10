@@ -7,6 +7,7 @@ package spilprojekt4.core;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -185,7 +186,7 @@ public class Game implements ApplicationListener {
     private void update() {
         gameData.setMouseX(Gdx.input.getX());
         gameData.setMouseY(gameData.getDisplayHeight() - Gdx.input.getY());
-
+        
         for (IServiceProcessor e : processorList) {
             e.process(gameData, world);
         }

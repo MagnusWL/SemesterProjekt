@@ -14,7 +14,7 @@ public class GameKeys {
     private static boolean[] keys;
     private static boolean[] pkeys;
 
-    private static final int NUM_KEYS = 8;
+    private static final int NUM_KEYS = 9;
     public static final int W = 0;
     public static final int A = 1;
     public static final int S = 2;
@@ -23,6 +23,7 @@ public class GameKeys {
     public static final int ESCAPE = 5;
     public static final int SPACE = 6;
     public static final int SHIFT = 7;
+    public static final int MOUSE0 = 8;
 
     public GameKeys() {
         keys = new boolean[NUM_KEYS];

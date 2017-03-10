@@ -1,5 +1,6 @@
 package spilprojekt4.core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import spilprojekt4.common.GameData;
@@ -39,6 +40,9 @@ public class InputController extends InputAdapter {
         if (k == Input.Keys.SHIFT_LEFT || k == Input.Keys.SHIFT_RIGHT) {
             gameData.getKeys().setKey(GameKeys.SHIFT, true);
         }
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            gameData.getKeys().setKey(GameKeys.MOUSE0, true);
+        }
         return true;
     }
 
@@ -67,6 +71,9 @@ public class InputController extends InputAdapter {
         }
         if (k == Input.Keys.SHIFT_LEFT || k == Input.Keys.SHIFT_RIGHT) {
             gameData.getKeys().setKey(GameKeys.SHIFT, false);
+        }
+        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            gameData.getKeys().setKey(GameKeys.MOUSE0, false);
         }
         return true;
     }
