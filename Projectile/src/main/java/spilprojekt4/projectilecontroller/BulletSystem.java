@@ -22,9 +22,9 @@ import spilprojekt4.common.events.EventType;
  *
  * @author burno
  */
-@ServiceProviders(value={
-        @ServiceProvider(service=IServiceProcessor.class),
-        @ServiceProvider(service=IServiceInitializer.class)})
+@ServiceProviders(value = {
+    @ServiceProvider(service = IServiceProcessor.class),
+    @ServiceProvider(service = IServiceInitializer.class)})
 
 public class BulletSystem implements IServiceProcessor, IServiceInitializer {
 
@@ -53,6 +53,16 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
                 float angle = (float) Math.atan2(gameData.getMouseY() - (player.getY() + 15 - gameData.getCameraY()), gameData.getMouseX() - (player.getX() + 15 - gameData.getCameraX()));
                 world.addEntity(createBullet(player, gameData, world, angle));
                 gameData.removeEvent(e);
+            }
+
+            if (e.getType() == EventType.ENEMY_SHOOT) {
+                for(Entity player: world.getEntities(EntityType.PLAYER))
+                {
+                    Entity enemy = world.getEntity(e.getEntityID());
+                    float angle = (float) Math.atan2((player.getY() + 15) - (enemy.getY() + 15), (player.getX() + 15) - (enemy.getX() + 15));
+                    world.addEntity(createBullet(enemy, gameData, world, angle));
+                    gameData.removeEvent(e);
+                }
             }
         }
     }

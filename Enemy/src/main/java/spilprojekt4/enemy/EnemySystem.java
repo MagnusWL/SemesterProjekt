@@ -25,9 +25,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void process(GameData gameData, World world) {
-
         for (Entity entity : world.getEntities(EntityType.ENEMY)) {
-
             for (Entity player : world.getEntities(EntityType.PLAYER)) {
                 if (player.getX() > entity.getX()) {
                     entity.setVelocity(entity.getMovementSpeed());
@@ -72,6 +70,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         enemyCharacter.setSprite("penisenemy");
         enemyCharacter.setShapeX(new float[]{5, 25, 25, 5});
         enemyCharacter.setShapeY(new float[]{25, 25, 2, 2});
+        gameData.addEvent(new Event(EventType.PICKUP_WEAPON, enemyCharacter.getID()));
 
         enemies.add(enemyCharacter);
 
