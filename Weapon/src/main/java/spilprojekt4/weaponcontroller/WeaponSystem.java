@@ -47,12 +47,10 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
             if (carrier.getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S) && gun.getTimeSinceAttack() > gun.getAttackCooldown()) {
                 gameData.addEvent(new Event(EventType.PLAYER_SHOOT, gun.getID()));
                 gun.setTimeSinceAttack(0);
-            }
-            else if (carrier.getEntityType() == EntityType.ENEMY) {
+            } else if (carrier.getEntityType() == EntityType.ENEMY) {
                 gameData.addEvent(new Event(EventType.ENEMY_SHOOT, gun.getID()));
                 gun.setTimeSinceAttack(0);
-            }
-            else {
+            } else {
                 gun.setTimeSinceAttack(gun.getTimeSinceAttack() + 1 * gameData.getDelta());
             }
         }
@@ -70,7 +68,7 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void start(GameData gameData, World world) {
-        
+
     }
 
     @Override
