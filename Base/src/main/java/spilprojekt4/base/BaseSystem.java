@@ -27,7 +27,6 @@ public class BaseSystem implements IServiceProcessor, IServiceInitializer {
 
                     entity.setLife(entity.getLife() - 1);
                     if (entity.getLife() <= 0) {
-                        world.removeWeapon(entity.getID());
                         world.removeEntity(entity);
                     }
 
@@ -49,21 +48,21 @@ public class BaseSystem implements IServiceProcessor, IServiceInitializer {
         base.setEntityType(EntityType.BASE);
         base.setX((int) (gameData.getDisplayWidth() * 0.2));
         base.setY((int) (gameData.getDisplayHeight() * 0.51));
-        base.setMaxLife(100);
+        base.setMaxLife(50);
         base.setLife(base.getMaxLife());
         base.setHasGravity(false);
         base.setSprite("base");
 
         base.setShapeX(new float[]{
-            base.getX() - 4,
-            base.getX() + 4,
-            base.getX() + 4,
-            base.getX() - 4});
+            20,
+            20,
+            80,
+            80});
         base.setShapeY(new float[]{
-            base.getY() + 4,
-            base.getY() + 4,
-            base.getY() - 4,
-            base.getY() - 4});
+            0,
+            100,
+            100,
+            0});
 
         return base;
     }
