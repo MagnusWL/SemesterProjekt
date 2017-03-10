@@ -76,7 +76,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
 
         enemyCharacter.setEntityType(EntityType.ENEMY);
         enemyCharacter.setX((int) (gameData.getDisplayWidth()/2.0 + gameData.getDisplayWidth()/2.0 * Math.random()));
-        enemyCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
+        enemyCharacter.setY((int) (gameData.getDisplayHeight() * 0.15));
         enemyCharacter.setHasGravity(true);
         enemyCharacter.setMaxLife(10);
         enemyCharacter.setLife(enemyCharacter.getMaxLife());
