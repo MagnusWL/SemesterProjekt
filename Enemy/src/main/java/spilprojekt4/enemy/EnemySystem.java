@@ -36,6 +36,13 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
                         } else {
                             entity.setVelocity(0);
                         }
+                    } else {
+                        if (base.getX() - 25 > entity.getX()) {
+                            entity.setVelocity(entity.getMovementSpeed());
+                        }
+                        if (base.getX() + 25 < entity.getX()) {
+                            entity.setVelocity(entity.getMovementSpeed());
+                        }
                     }
                 }
             }
