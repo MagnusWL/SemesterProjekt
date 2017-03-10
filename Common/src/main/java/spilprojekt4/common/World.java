@@ -29,6 +29,12 @@ public class World {
         return r;
     }
     
+    public void removeWeapon(String id)
+    {
+        weapons.remove(id);
+        entityMap.remove(id);
+    }
+    
     public Entity getEntity(String id)
     {
         return entityMap.get(id);
