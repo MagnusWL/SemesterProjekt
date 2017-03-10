@@ -5,9 +5,7 @@
  */
 package spilprojekt4.weaponcontroller;
 
-import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import spilprojekt4.common.Entity;
@@ -17,7 +15,6 @@ import spilprojekt4.common.GameKeys;
 import spilprojekt4.common.World;
 import spilprojekt4.common.events.Event;
 import spilprojekt4.common.events.EventType;
-import spilprojekt4.common.services.ICollisionService;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
 
