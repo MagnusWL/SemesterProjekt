@@ -48,7 +48,7 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
             }
             
             if (carrier.getEntityType() == EntityType.ENEMY && gun.getTimeSinceAttack() > gun.getAttackCooldown()) {
-                gameData.addEvent(new Event(EventType.ENEMY_SHOOT, gun.getID()));
+                //gameData.addEvent(new Event(EventType.ENEMY_SHOOT, gun.getID()));
                 gun.setTimeSinceAttack(0);
             }
         }

@@ -22,6 +22,9 @@ public class Processor implements IServiceProcessor {
         for (ICollisionService e : Lookup.getDefault().lookupAll(ICollisionService.class)) {
             for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.PROJECTILE)) {
                 steps = (int) (Math.ceil(Math.abs(entity.getVelocity())) + Math.ceil(Math.abs(entity.getVerticalVelocity())));
+                if (steps > 20) {
+                    steps = 20;
+                }
                 for (int i = 0; i < steps; i++) {
                     //X
                     if (!e.isColliding(world, gameData, entity, entity.getVelocity() * gameData.getDelta() * (1.0f / steps), 0)) {
