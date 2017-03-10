@@ -31,7 +31,9 @@ public class World {
     
     public void removeWeapon(String id)
     {
-        entityMap.remove(weapons.get(id).getID());
+        if(weapons.get(id) != null) 
+            entityMap.remove(weapons.get(id).getID());
+    
         weapons.remove(id);
     }
     
