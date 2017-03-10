@@ -7,11 +7,9 @@ import org.openide.util.lookup.ServiceProviders;
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
-import spilprojekt4.common.GameKeys;
 import spilprojekt4.common.World;
 import spilprojekt4.common.events.Event;
 import spilprojekt4.common.events.EventType;
-import spilprojekt4.common.services.ICollisionService;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
 

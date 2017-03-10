@@ -14,7 +14,6 @@ import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
-import static spilprojekt4.common.EntityType.PLAYER;
 import spilprojekt4.common.events.Event;
 import spilprojekt4.common.events.EventType;
 
@@ -56,12 +55,20 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
             }
 
             if (e.getType() == EventType.ENEMY_SHOOT) {
-                for(Entity player: world.getEntities(EntityType.PLAYER))
-                {
-                    Entity enemy = world.getEntity(e.getEntityID());
-                    float angle = (float) Math.atan2((player.getY() + 15) - (enemy.getY() + 15), (player.getX() + 15) - (enemy.getX() + 15));
-                    world.addEntity(createBullet(enemy, gameData, world, angle));
-                    gameData.removeEvent(e);
+                for (Entity player : world.getEntities(EntityType.PLAYER)) {
+                    for (Entity base : world.getEntities(EntityType.BASE)) {
+
+                        Entity enemy = world.getEntity(e.getEntityID());
+                        if (Math.abs(enemy.getX() - player.getX()) < Math.abs(enemy.getX() - base.getX())) {
+                            float angle = (float) Math.atan2((player.getY() + 15) - (enemy.getY() + 15), (player.getX() + 15) - (enemy.getX() + 15));
+                            world.addEntity(createBullet(enemy, gameData, world, angle));
+                            gameData.removeEvent(e);
+                        } else {
+                            float angle = (float) Math.atan2(base.getY() + 50 - (enemy.getY() + 15), (base.getX() + 50) - (enemy.getX() + 15));
+                            world.addEntity(createBullet(enemy, gameData, world, angle));
+                            gameData.removeEvent(e);
+                        }
+                    }
                 }
             }
         }
