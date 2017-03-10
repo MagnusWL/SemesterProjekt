@@ -101,9 +101,9 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
 
     private void movementDecision(Entity enemy, EntityType target, World world) {
         for (Entity entity : world.getEntities(target)) {
-            if (entity.getX() - 150 > enemy.getX()) {
+            if (entity.getX() - 100 > enemy.getX()) {
                 enemy.setVelocity(enemy.getMovementSpeed());
-            } else if (entity.getX() + 150 < enemy.getX()) {
+            } else if (entity.getX() + 100 < enemy.getX()) {
                 enemy.setVelocity(-enemy.getMovementSpeed());
             } else {
                 enemy.setVelocity(0);
