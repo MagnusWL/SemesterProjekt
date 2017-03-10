@@ -68,7 +68,7 @@ public class Game implements ApplicationListener {
                 new InputController(gameData)
         );
         batch = new SpriteBatch();
-        
+
         Texture tex = new Texture(Gdx.files.internal("midgårdsormen.png"));
         spriteMap.put("midgårdsormen", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("penisenemy.png"));
@@ -79,6 +79,10 @@ public class Game implements ApplicationListener {
         spriteMap.put("gun", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("bullet.png"));
         spriteMap.put("bullet", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("sky.png"));
+        spriteMap.put("sky", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("grass.png"));
+        spriteMap.put("grass", new Sprite(tex));
         sr = new ShapeRenderer();
     }
 
@@ -159,23 +163,23 @@ public class Game implements ApplicationListener {
     }
 
     private void drawMap() {
-        sr.setAutoShapeType(true);
+        batch.begin();
         for (Entity map : world.getEntities(EntityType.MAP)) {
-            sr.begin(ShapeType.Filled);
             for (int i = 0; i < gameData.getMapWidth(); i++) {
                 for (int j = 0; j < gameData.getMapHeight(); j++) {
                     if (map.getMap()[i][j] == 0) {
-                        sr.setColor(0.4f, 0.6f, 1, 1f);
+                        spriteMap.get("sky").setX(gameData.getTileSize() * i - gameData.getCameraX());
+                        spriteMap.get("sky").setY(gameData.getTileSize() * j - gameData.getCameraY());
+                        spriteMap.get("sky").draw(batch);
                     } else if (map.getMap()[i][j] == 1) {
-                        sr.setColor(0.1f, 0.6f, 0.1f, 1f);
+                        spriteMap.get("grass").setX(gameData.getTileSize() * i - gameData.getCameraX());
+                        spriteMap.get("grass").setY(gameData.getTileSize() * j - gameData.getCameraY());
+                        spriteMap.get("grass").draw(batch);
                     }
-                    sr.rect(gameData.getTileSize() * i - gameData.getCameraX(),
-                            gameData.getTileSize() * j - gameData.getCameraY(),
-                            gameData.getTileSize(), gameData.getTileSize());
                 }
             }
-            sr.end();
         }
+        batch.end();
     }
 
     private void update() {

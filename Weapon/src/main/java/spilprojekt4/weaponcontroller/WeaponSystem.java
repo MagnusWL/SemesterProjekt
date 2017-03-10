@@ -37,7 +37,8 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
             Entity carrier = world.getEntity(key);
             Entity gun = world.getWeapons().get(key);
-            gun.setX(carrier.getX());
+            gun.setX(
+                    carrier.getX());
             gun.setY(carrier.getY());
             gun.setVelocity(carrier.getVelocity());
             gun.setTimeSinceAttack(gun.getTimeSinceAttack() + 10 * gameData.getDelta());
