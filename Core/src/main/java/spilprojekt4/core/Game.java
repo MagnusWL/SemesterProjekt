@@ -71,28 +71,7 @@ public class Game implements ApplicationListener {
         );
         batch = new SpriteBatch();
 
-        Texture tex = new Texture(Gdx.files.internal("Player.png"));
-        spriteMap.put("Player", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("Enemy.png"));
-        spriteMap.put("Enemy", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("base.png"));
-        spriteMap.put("base", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("gun.png"));
-        spriteMap.put("gun", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("bullet.png"));
-        spriteMap.put("bullet", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("sky.png"));
-        spriteMap.put("sky", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("grass.png"));
-        spriteMap.put("grass", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("back1.png"));
-        spriteMap.put("back1", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("back2.png"));
-        spriteMap.put("back2", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("back3.png"));
-        spriteMap.put("back3", new Sprite(tex));
-        tex = new Texture(Gdx.files.internal("back4.png"));
-        spriteMap.put("back4", new Sprite(tex));
+        
 
         sr = new ShapeRenderer();
     }

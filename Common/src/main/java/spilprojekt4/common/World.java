@@ -12,15 +12,7 @@ public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
     private Map<String, Entity> weapons = new ConcurrentHashMap<>();
-    private Map<String, String> animations = new ConcurrentHashMap<>();
-
-    public String getAnimation(String animation) {
-        return animations.get(animation);
-    }
-
-    public void setAnimations(String animationName, String animation) {
-        animations.put(animationName, animation);
-    }
+   
 
     public Map<String, Entity> getWeapons() {
         return weapons;
