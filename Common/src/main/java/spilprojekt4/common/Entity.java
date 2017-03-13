@@ -24,6 +24,7 @@ public class Entity {
     private UUID ID = UUID.randomUUID();
     private int[][] map;
     private String currentAnimation;
+    private int value;
 
     public String getCurrentAnimation() {
         return currentAnimation;
@@ -31,6 +32,14 @@ public class Entity {
 
     public void setCurrentAnimation(String currentAnimation) {
         this.currentAnimation = currentAnimation;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public boolean isGrounded() {
@@ -48,7 +57,7 @@ public class Entity {
     public void setTimeSinceAttack(float timeSinceAttack) {
         this.timeSinceAttack = timeSinceAttack;
     }
-    
+
     public float getAttackCooldown() {
         return attackCooldown;
     }
