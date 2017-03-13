@@ -19,6 +19,8 @@
                         <publicPackage>spilprojekt4.common</publicPackage>
                         <publicPackage>spilprojekt4.common.events</publicPackage>
                         <publicPackage>spilprojekt4.common.services</publicPackage>
+                        <publicPackage>spilprojekt4/common/components</publicPackage>
+                        <publicPackage>spilprojekt4.common.components</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
