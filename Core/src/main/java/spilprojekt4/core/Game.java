@@ -85,7 +85,6 @@ public class Game implements ApplicationListener {
         spriteMap.put("sky", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("grass.png"));
         spriteMap.put("grass", new Sprite(tex));
-
         tex = new Texture(Gdx.files.internal("back1.png"));
         spriteMap.put("back1", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("back2.png"));
