@@ -3,15 +3,39 @@ package spilprojekt4.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.GameKeys;
 
-public class InputController extends InputAdapter {
+public class InputController extends InputAdapter
+{
 
     private final GameData gameData;
 
     public InputController(GameData gameData) {
         this.gameData = gameData;
+    }
+    
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        gameData.getKeys().setKey(GameKeys.MOUSE0, true);
+//        System.out.println("BEFORE DOWN");
+//        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//            System.out.println("DOWN");
+//            gameData.getKeys().setKey(GameKeys.MOUSE0, true);
+//        }
+        return true;
+    }
+    
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        gameData.getKeys().setKey(GameKeys.MOUSE0, false);
+//        System.out.println("BEFORE UP");
+//        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//            System.out.println("UP");
+//            gameData.getKeys().setKey(GameKeys.MOUSE0, false);
+//        }
+        return true;
     }
 
     @Override
@@ -39,9 +63,6 @@ public class InputController extends InputAdapter {
         }
         if (k == Input.Keys.SHIFT_LEFT || k == Input.Keys.SHIFT_RIGHT) {
             gameData.getKeys().setKey(GameKeys.SHIFT, true);
-        }
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            gameData.getKeys().setKey(GameKeys.MOUSE0, true);
         }
         return true;
     }
@@ -71,9 +92,6 @@ public class InputController extends InputAdapter {
         }
         if (k == Input.Keys.SHIFT_LEFT || k == Input.Keys.SHIFT_RIGHT) {
             gameData.getKeys().setKey(GameKeys.SHIFT, false);
-        }
-        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            gameData.getKeys().setKey(GameKeys.MOUSE0, false);
         }
         return true;
     }
