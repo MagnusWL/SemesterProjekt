@@ -73,6 +73,7 @@
         <module>Map</module>
         <module>mavenproject1/GDXLoader</module>
         <module>Renderer</module>
+        <module>Currency</module>
     </modules>
 
     <properties>
