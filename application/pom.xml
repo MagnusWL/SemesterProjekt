@@ -29,11 +29,6 @@
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-core-startup</artifactId>
             <version>${netbeans.version}</version>
-        </dependency>        
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>NBRuntimeExample-branding</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <!-- NbModuleSuite functional in RELEASE70 or later: -->
         <dependency>
