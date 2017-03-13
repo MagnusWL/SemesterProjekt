@@ -18,21 +18,23 @@ public class InputController extends InputAdapter
     
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        System.out.println("BEFORE DOWN");
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            System.out.println("DOWN");
-            gameData.getKeys().setKey(GameKeys.MOUSE0, true);
-        }
+        gameData.getKeys().setKey(GameKeys.MOUSE0, true);
+//        System.out.println("BEFORE DOWN");
+//        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//            System.out.println("DOWN");
+//            gameData.getKeys().setKey(GameKeys.MOUSE0, true);
+//        }
         return true;
     }
     
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        System.out.println("BEFORE UP");
-        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            System.out.println("UP");
-            gameData.getKeys().setKey(GameKeys.MOUSE0, false);
-        }
+        gameData.getKeys().setKey(GameKeys.MOUSE0, false);
+//        System.out.println("BEFORE UP");
+//        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//            System.out.println("UP");
+//            gameData.getKeys().setKey(GameKeys.MOUSE0, false);
+//        }
         return true;
     }
 

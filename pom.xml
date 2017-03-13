@@ -71,6 +71,7 @@
         <module>Weapon</module>
         <module>Projectile</module>
         <module>Map</module>
+        <module>mavenproject1/GDXLoader</module>
     </modules>
 
     <properties>
